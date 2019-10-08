@@ -10,8 +10,8 @@ import (
 type QualifiedWeekday struct {
 	// N, when non-zero, says which instance of the weekday relative to
 	// some greater duration. -3 would be "third from the last".
-	N  int
-	WD time.Weekday
+	N  int          `json:"n"`
+	WD time.Weekday `json:"wd"`
 }
 
 func (wd QualifiedWeekday) String() string {

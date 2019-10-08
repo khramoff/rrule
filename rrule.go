@@ -18,39 +18,40 @@ import (
 
 // RRule represents a single pattern within a recurrence.
 type RRule struct {
-	Frequency Frequency
+	Frequency Frequency `json:"frequency"`
 
 	// Either Until or Count may be set, but not both
-	Until         time.Time
-	UntilFloating bool // If true, the RRule will encode using local time (no offset).
+	Until time.Time `json:"until"`
+	// If true, the RRule will encode using local time (no offset).
+	UntilFloating bool `json:"until_floating"`
 
-	Count uint64
+	Count uint64 `json:"count"`
 
 	// Dtstart is not actually part of the RRule when
 	// encoded, but it's included here as a field because
 	// it's required when expading the pattern.
 	//
 	// If zero, time.Now is used when an iterator is generated.
-	Dtstart time.Time
+	Dtstart time.Time `json:"dtstart"`
 
 	// 0 means the default value, which is 1.
-	Interval int
+	Interval int `json:"interval"`
 
-	BySeconds     []int // 0 to 59
-	ByMinutes     []int // 0 to 59
-	ByHours       []int // 0 to 23
-	ByWeekdays    []QualifiedWeekday
-	ByMonthDays   []int // 1 to 31
-	ByWeekNumbers []int // 1 to 53
-	ByMonths      []time.Month
-	ByYearDays    []int // 1 to 366
-	BySetPos      []int // -366 to 366
+	BySeconds     []int              `json:"by_seconds"` // 0 to 59
+	ByMinutes     []int              `json:"by_minutes"` // 0 to 59
+	ByHours       []int              `json:"by_hours"`   // 0 to 23
+	ByWeekdays    []QualifiedWeekday `json:"by_weekdays"`
+	ByMonthDays   []int              `json:"by_month_days"`   // 1 to 31
+	ByWeekNumbers []int              `json:"by_week_numbers"` // 1 to 53
+	ByMonths      []time.Month       `json:"by_months"`
+	ByYearDays    []int              `json:"by_year_days"` // 1 to 366
+	BySetPos      []int              `json:"by_set_pos"`   // -366 to 366
 
 	// InvalidBehavior defines how to behave when a generated date wouldn't
 	// exist, like February 31st.
-	InvalidBehavior InvalidBehavior
+	InvalidBehavior InvalidBehavior `json:"invalid_behavior"`
 
-	WeekStart *time.Weekday // if nil, Monday
+	WeekStart *time.Weekday `json:"week_start"` // if nil, Monday
 }
 
 // Validate checks that the pattern is valid.

@@ -12,30 +12,30 @@ type Recurrence struct {
 	// used when an iterator is generated.  The location of Dtstart is the
 	// location that will be used to process the recurrence, which is
 	// particularly relevant for calculations affected by Daylight Savings.
-	Dtstart time.Time
+	Dtstart time.Time `json:"dtstart"`
 
 	// FloatingLocation determines how the Recurrence is encoded to string.
 	// If true, Dtstart, RDates, and ExDates will be written in local time,
 	// excluding the offset or timezone indicator, to represent a local time
 	// independent of timezone. See ParseRecurrence or RFC 5545 for more
 	// detail.
-	FloatingLocation bool
+	FloatingLocation bool `json:"floating_location"`
 
 	// Patterns and instances to include. Repeated instances are included only
 	// once, even if defined by multiple patterns.
 	//
 	// The Dtstart property of RRule and ExRule patterns are
 	// ignored, including when the above Dtstart property is zero.
-	RRules []RRule
-	RDates []time.Time
+	RRules []RRule     `json:"r_rules"`
+	RDates []time.Time `json:"r_dates"`
 
 	// Patterns and instances to exclude. These take precedence over the
 	// inclusions. Note: this feature was deprecated in RFC5545, noting its
 	// limited (and buggy) adoption and real-world use case. It is
 	// implemented here, nonetheless, for maximum flexibility and
 	// compatibility.
-	ExRules []RRule
-	ExDates []time.Time
+	ExRules []RRule     `json:"ex_rules"`
+	ExDates []time.Time `json:"ex_dates"`
 }
 
 // String returns the RFC 5545 representation of the recurrence, which is a
