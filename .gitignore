@@ -1,2 +1,3 @@
 # common output files, e.g. cover.out, cpu.out
 *.out
+.idea/
