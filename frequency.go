@@ -1,6 +1,12 @@
 package rrule
 
-import "log"
+import (
+	"encoding/json"
+	"errors"
+	"github.com/spf13/cast"
+	"log"
+	"strconv"
+)
 
 // Frequency defines a set of constants for a base factor for how often recurrences happen.
 type Frequency int
@@ -37,3 +43,29 @@ const (
 	Monthly
 	Yearly
 )
+
+func (f Frequency) MarshalJSON() ([]byte, error) {
+	return json.Marshal(int(f))
+}
+
+func (d *Frequency) UnmarshalJSON(b []byte) error {
+	var v interface{}
+	if err := json.Unmarshal(b, &v); err != nil {
+		return err
+	}
+	switch value := v.(type) {
+	case int:
+		*d = Frequency(cast.ToInt(value))
+		return nil
+	case string:
+		var err error
+		i, err := strconv.Atoi(v.(string))
+		if err != nil {
+			return err
+		}
+		*d = Frequency(i)
+		return nil
+	default:
+		return errors.New("invalid frequency")
+	}
+}
