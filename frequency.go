@@ -54,7 +54,7 @@ func (d *Frequency) UnmarshalJSON(b []byte) error {
 		return err
 	}
 	switch value := v.(type) {
-	case int:
+	case int,int32,float64,float32,int64:
 		*d = Frequency(cast.ToInt(value))
 		return nil
 	case string:
