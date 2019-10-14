@@ -37,21 +37,21 @@ type RRule struct {
 	// 0 means the default value, which is 1.
 	Interval int `json:"interval"`
 
-	BySeconds     []int              `json:"by_seconds"` // 0 to 59
-	ByMinutes     []int              `json:"by_minutes"` // 0 to 59
-	ByHours       []int              `json:"by_hours"`   // 0 to 23
-	ByWeekdays    []QualifiedWeekday `json:"by_weekdays"`
-	ByMonthDays   []int              `json:"by_month_days"`   // 1 to 31
-	ByWeekNumbers []int              `json:"by_week_numbers"` // 1 to 53
-	ByMonths      []time.Month       `json:"by_months"`
-	ByYearDays    []int              `json:"by_year_days"` // 1 to 366
-	BySetPos      []int              `json:"by_set_pos"`   // -366 to 366
+	BySeconds     []int              `json:"by_seconds,omitempty"` // 0 to 59
+	ByMinutes     []int              `json:"by_minutes,omitempty"` // 0 to 59
+	ByHours       []int              `json:"by_hours,omitempty"`   // 0 to 23
+	ByWeekdays    []QualifiedWeekday `json:"by_weekdays,omitempty"`
+	ByMonthDays   []int              `json:"by_month_days,omitempty"`   // 1 to 31
+	ByWeekNumbers []int              `json:"by_week_numbers,omitempty"` // 1 to 53
+	ByMonths      []time.Month       `json:"by_months,omitempty"`
+	ByYearDays    []int              `json:"by_year_days,omitempty"` // 1 to 366
+	BySetPos      []int              `json:"by_set_pos,omitempty"`   // -366 to 366
 
 	// InvalidBehavior defines how to behave when a generated date wouldn't
 	// exist, like February 31st.
 	InvalidBehavior InvalidBehavior `json:"invalid_behavior"`
 
-	WeekStart *time.Weekday `json:"week_start"` // if nil, Monday
+	WeekStart *time.Weekday `json:"week_start,omitempty"` // if nil, Monday
 }
 
 // Validate checks that the pattern is valid.
