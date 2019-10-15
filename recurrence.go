@@ -27,15 +27,15 @@ type Recurrence struct {
 	// The Dtstart property of RRule and ExRule patterns are
 	// ignored, including when the above Dtstart property is zero.
 	RRules []RRule     `json:"r_rules"`
-	RDates []time.Time `json:"r_dates"`
+	RDates []time.Time `json:"r_dates,omitempty"`
 
 	// Patterns and instances to exclude. These take precedence over the
 	// inclusions. Note: this feature was deprecated in RFC5545, noting its
 	// limited (and buggy) adoption and real-world use case. It is
 	// implemented here, nonetheless, for maximum flexibility and
 	// compatibility.
-	ExRules []RRule     `json:"ex_rules"`
-	ExDates []time.Time `json:"ex_dates"`
+	ExRules []RRule     `json:"ex_rules,omitempty"`
+	ExDates []time.Time `json:"ex_dates,omitempty"`
 }
 
 // String returns the RFC 5545 representation of the recurrence, which is a
